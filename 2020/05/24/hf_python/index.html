@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="zh">
+    <head>
+    <meta charset="utf-8">
+
+    
+
+    <!--icon-->
+    
+        <link rel="shortcut icon" type='image/x-icon' href="/favicon.ico">
+    
+
+    <!-- 渲染优化 -->
+    <meta name="renderer" content="webkit">
+    <meta name="force-rendering" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta name="HandheldFriendly" content="True" >
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <!-- meta -->
+    
+    <title>Hartree-Fock SCF Program | RobinRoom</title>
+    
+    
+
+    <!--Social link-->
+     
+        <meta name="description" content="Hartree Fock Self Consistent Field: A Simple Python Implementation  Basic Review  Hartree-Fock Equation Hartree Fock Theory is a classic theory for solving many electron problem, which is useful in C">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hartree-Fock SCF Program">
+<meta property="og:url" content="http://robinzyb.github.io/2020/05/24/hf_python/index.html">
+<meta property="og:site_name" content="RobinRoom">
+<meta property="og:description" content="Hartree Fock Self Consistent Field: A Simple Python Implementation  Basic Review  Hartree-Fock Equation Hartree Fock Theory is a classic theory for solving many electron problem, which is useful in C">
+<meta property="og:locale" content="zh">
+<meta property="article:published_time" content="2020-05-24T20:47:19.000Z">
+<meta property="article:modified_time" content="2020-05-24T20:47:50.183Z">
+<meta property="article:author" content="Yongbin Zhuang">
+<meta name="twitter:card" content="summary_large_image">
+    
+
+    <!-- feed -->
+    
+
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-theme-cards@0.3/dist/css/style.min.css">
+ 
+    
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-theme-cards@0.1/dist/css/github.min.css" crossorigin="anonymous" media="none" onload="this.media='all'">
+    
+
+    <!--LaTex-->
+    
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css" integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq" crossorigin="anonymous" media="none" onload="this.media='all'">
+        <script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js" integrity="sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz" crossorigin="anonymous"></script>
+    
+
+     
+
+    
+        
+             
+        
+             
+        
+    
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+    <body>
+        <div id="app">
+            <header class="header">
+    <div class="header__left">
+        
+            <a href="/" class="button">
+                <span class="logo__text">
+                    ← RobinRoom | 首頁
+                </span>
+            </a>
+        
+    </div>
+    <div class="header__right">
+         
+    </div>
+</header>
+
+
+            <main class="main">
+    <div class="post-title">
+    <h1 class="post-title__text">
+        Hartree-Fock SCF Program
+    </h1>
+    <div class="post-title__meta">
+        
+            <a href="/archives/2020/05/" class="button" style="color: #808080;">
+    2020-05-24
+</a>
+        
+        
+            
+ 
+        
+        
+     
+ 
+
+  
+    </div>
+</div>
+
+
+    <div class="post__with-side">
+        <aside class="post-side">
+            <div class="post-side__toc">
+                <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#basic-review"><span class="toc-text"> Basic Review</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#hartree-fock-equation"><span class="toc-text"> Hartree-Fock Equation</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#the-self-consistent-field-scf"><span class="toc-text"> The Self Consistent Field (SCF)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#matrix-form-of-fockian-the-hartree-fock-roothan-equation"><span class="toc-text"> Matrix Form of Fockian: The Hartree-Fock-Roothan Equation</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#programing"><span class="toc-text"> Programing</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#the-recipe"><span class="toc-text"> The Recipe</span></a></li></ol></li></ol>
+            </div>
+        </aside>
+
+<article class="post content-card">
+    <div class="post__header">
+        
+             
+        
+        
+            
+    <div class="post__expire" id="post-expired-notify">
+        <p>
+            本文最後更新於 <span id="expire-date"></span> 天前，文中部分描述可能已經過時。
+        </p>
+    </div>
+    <script>
+        (() => {
+            var update = Date.parse("2020-05-24"),
+                date = new Date(),
+                now = date.getTime(),
+                expire = now - update,
+                expire_days = Math.floor(expire/(24*3600*1000));
+            if (expire_days >= 120) {
+                document.querySelectorAll('#expire-date')[0].innerHTML = expire_days;
+                document.querySelectorAll('#post-expired-notify')[0].style.display = 'block';
+            }
+        })();
+    </script>
+
+        
+    </div>
+    <div class="post__content">
+        <div class="markdown-body">
+            <h1 id="hartree-fock-self-consistent-field-a-simple-python-implementation"><a class="markdownIt-Anchor" href="#hartree-fock-self-consistent-field-a-simple-python-implementation"></a> Hartree Fock Self Consistent Field: A Simple Python Implementation</h1>
+<h2 id="basic-review"><a class="markdownIt-Anchor" href="#basic-review"></a> Basic Review</h2>
+<h3 id="hartree-fock-equation"><a class="markdownIt-Anchor" href="#hartree-fock-equation"></a> Hartree-Fock Equation</h3>
+<p>Hartree Fock Theory is a classic theory for solving many electron problem, which is useful in Chemistry, since molecules, nanoparticles and catalysts contain a lot of electrons. The theoretic background with detail deduction is referred to a very good book <em>Modern Quantum Chemistry</em>(Szabo). I will summarize the points here.</p>
+<p>This theory approximates that the electrons move in the <em>averaged</em> field exerted from all the rest of electrons. Instead of using Hamilatonian to solve the schordinger equation:</p>
+<p class='katex-block'><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>H</mi><mi mathvariant="normal">Ψ</mi><mo>=</mo><mi>E</mi><mi mathvariant="normal">Ψ</mi></mrow><annotation encoding="application/x-tex">H\Psi = E\Psi
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.08125em;">H</span><span class="mord">Ψ</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.05764em;">E</span><span class="mord">Ψ</span></span></span></span></span></p>
+<p>We replace the Hamiltonian with the Fock operator, or the Fockian:</p>
+<p class='katex-block'><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>F</mi><msub><mi>ψ</mi><mi>i</mi></msub><mo>=</mo><msub><mi>ϵ</mi><mi>i</mi></msub><msub><mi>ψ</mi><mi>i</mi></msub></mrow><annotation encoding="application/x-tex">F\psi_i = \epsilon_i\psi_i
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="mord mathdefault" style="margin-right:0.13889em;">F</span><span class="mord"><span class="mord mathdefault" style="margin-right:0.03588em;">ψ</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31166399999999994em;"><span style="top:-2.5500000000000003em;margin-left:-0.03588em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="mord"><span class="mord mathdefault">ϵ</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31166399999999994em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.03588em;">ψ</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31166399999999994em;"><span style="top:-2.5500000000000003em;margin-left:-0.03588em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span></span></p>
+<p><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi mathvariant="normal">Ψ</mi></mrow><annotation encoding="application/x-tex">\Psi</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord">Ψ</span></span></span></span> is a wavefunction of whole system, <span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>ψ</mi><mi>i</mi></msub></mrow><annotation encoding="application/x-tex">\psi_i</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.03588em;">ψ</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31166399999999994em;"><span style="top:-2.5500000000000003em;margin-left:-0.03588em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span> is a wavefunction of a single orbital. Then System’s wavefunction can be constructed from a list of occupied single orbital wavefunction via the <em>Slater determinant</em>.</p>
+<p>Fockian contains the interactions that one electron will feels,</p>
+<p class='katex-block'><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>F</mi><mo>=</mo><munder><munder><msub><mi>T</mi><mi>i</mi></msub><mo stretchy="true">⏟</mo></munder><mtext>kinetic energy</mtext></munder><mo>+</mo><munder><munder><mrow><munder><mo>∑</mo><mi>R</mi></munder><msub><mi>V</mi><mrow><mi>n</mi><mi>u</mi><mi>c</mi></mrow></msub><mo stretchy="false">(</mo><mi>R</mi><mo stretchy="false">)</mo></mrow><mo stretchy="true">⏟</mo></munder><mtext>attraction from nuclear</mtext></munder><mo>+</mo><munder><munder><mrow><munder><mo>∑</mo><mi>j</mi></munder><mi>J</mi><mo stretchy="false">(</mo><mi>j</mi><mo stretchy="false">)</mo><mo>−</mo><mi>K</mi><mo stretchy="false">(</mo><mi>j</mi><mo stretchy="false">)</mo></mrow><mo stretchy="true">⏟</mo></munder><mtext>ee repulsion</mtext></munder></mrow><annotation encoding="application/x-tex">F = \underbrace{T_i}_{\text{kinetic energy}} + \underbrace{\sum_{R}V_{nuc}(R)}_{\text{attraction from nuclear}} + \underbrace{\sum_j J(j) - K(j)}_{\text{ee repulsion}}
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.13889em;">F</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:2.303546em;vertical-align:-1.6202159999999999em;"></span><span class="mord munder"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.68333em;"><span style="top:-1.515892em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord text mtight"><span class="mord mtight">kinetic energy</span></span></span></span></span><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord munder"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.68333em;"><span class="svg-align" style="top:-2.202em;"><span class="pstrut" style="height:3em;"></span><span class="stretchy" style="height:0.548em;min-width:1.6em;"><span class="brace-left" style="height:0.548em;"><svg width='400em' height='0.548em' viewBox='0 0 400000 548' preserveAspectRatio='xMinYMin slice'><path d='M0 6l6-6h17c12.688 0 19.313.3 20 1 4 4 7.313 8.3 10 13
+ 35.313 51.3 80.813 93.8 136.5 127.5 55.688 33.7 117.188 55.8 184.5 66.5.688
+ 0 2 .3 4 1 18.688 2.7 76 4.3 172 5h399450v120H429l-6-1c-124.688-8-235-61.7
+-331-161C60.687 138.7 32.312 99.3 7 54L0 41V6z'/></svg></span><span class="brace-center" style="height:0.548em;"><svg width='400em' height='0.548em' viewBox='0 0 400000 548' preserveAspectRatio='xMidYMin slice'><path d='M199572 214
+c100.7 8.3 195.3 44 280 108 55.3 42 101.7 93 139 153l9 14c2.7-4 5.7-8.7 9-14
+ 53.3-86.7 123.7-153 211-199 66.7-36 137.3-56.3 212-62h199568v120H200432c-178.3
+ 11.7-311.7 78.3-403 201-6 8-9.7 12-11 12-.7.7-6.7 1-18 1s-17.3-.3-18-1c-1.3 0
+-5-4-11-12-44.7-59.3-101.3-106.3-170-141s-145.3-54.3-229-60H0V214z'/></svg></span><span class="brace-right" style="height:0.548em;"><svg width='400em' height='0.548em' viewBox='0 0 400000 548' preserveAspectRatio='xMaxYMin slice'><path d='M399994 0l6 6v35l-6 11c-56 104-135.3 181.3-238 232-57.3
+ 28.7-117 45-179 50H-300V214h399897c43.3-7 81-15 113-26 100.7-33 179.7-91 237
+-174 2.7-5 6-9 10-13 .7-1 7.3-1 20-1h17z'/></svg></span></span></span><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"><span class="mord mathdefault" style="margin-right:0.13889em;">T</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31166399999999994em;"><span style="top:-2.5500000000000003em;margin-left:-0.13889em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.798em;"><span></span></span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:1.6202159999999999em;"><span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:3.6784489999999996em;vertical-align:-2.628444em;"></span><span class="mord munder"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.0500049999999999em;"><span style="top:-0.4215610000000001em;"><span class="pstrut" style="height:3.050005em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord text mtight"><span class="mord mtight">attraction from nuclear</span></span></span></span></span><span style="top:-3.0500049999999996em;"><span class="pstrut" style="height:3.050005em;"></span><span class="mord munder"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.050005em;"><span class="svg-align" style="top:-1.1076690000000005em;"><span class="pstrut" style="height:3.0500050000000005em;"></span><span class="stretchy" style="height:0.548em;min-width:1.6em;"><span class="brace-left" style="height:0.548em;"><svg width='400em' height='0.548em' viewBox='0 0 400000 548' preserveAspectRatio='xMinYMin slice'><path d='M0 6l6-6h17c12.688 0 19.313.3 20 1 4 4 7.313 8.3 10 13
+ 35.313 51.3 80.813 93.8 136.5 127.5 55.688 33.7 117.188 55.8 184.5 66.5.688
+ 0 2 .3 4 1 18.688 2.7 76 4.3 172 5h399450v120H429l-6-1c-124.688-8-235-61.7
+-331-161C60.687 138.7 32.312 99.3 7 54L0 41V6z'/></svg></span><span class="brace-center" style="height:0.548em;"><svg width='400em' height='0.548em' viewBox='0 0 400000 548' preserveAspectRatio='xMidYMin slice'><path d='M199572 214
+c100.7 8.3 195.3 44 280 108 55.3 42 101.7 93 139 153l9 14c2.7-4 5.7-8.7 9-14
+ 53.3-86.7 123.7-153 211-199 66.7-36 137.3-56.3 212-62h199568v120H200432c-178.3
+ 11.7-311.7 78.3-403 201-6 8-9.7 12-11 12-.7.7-6.7 1-18 1s-17.3-.3-18-1c-1.3 0
+-5-4-11-12-44.7-59.3-101.3-106.3-170-141s-145.3-54.3-229-60H0V214z'/></svg></span><span class="brace-right" style="height:0.548em;"><svg width='400em' height='0.548em' viewBox='0 0 400000 548' preserveAspectRatio='xMaxYMin slice'><path d='M399994 0l6 6v35l-6 11c-56 104-135.3 181.3-238 232-57.3
+ 28.7-117 45-179 50H-300V214h399897c43.3-7 81-15 113-26 100.7-33 179.7-91 237
+-174 2.7-5 6-9 10-13 .7-1 7.3-1 20-1h17z'/></svg></span></span></span><span style="top:-3.0500050000000005em;"><span class="pstrut" style="height:3.0500050000000005em;"></span><span class="mord"><span class="mop op-limits"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.0500050000000003em;"><span style="top:-1.855664em;margin-left:0em;"><span class="pstrut" style="height:3.05em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight" style="margin-right:0.00773em;">R</span></span></span></span><span style="top:-3.050005em;"><span class="pstrut" style="height:3.05em;"></span><span><span class="mop op-symbol large-op">∑</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:1.294336em;"><span></span></span></span></span></span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.22222em;">V</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.151392em;"><span style="top:-2.5500000000000003em;margin-left:-0.22222em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">n</span><span class="mord mathdefault mtight">u</span><span class="mord mathdefault mtight">c</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord mathdefault" style="margin-right:0.00773em;">R</span><span class="mclose">)</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:1.942336em;"><span></span></span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:2.628444em;"><span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:3.9339980000000003em;vertical-align:-2.8839930000000003em;"></span><span class="mord munder"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.050005em;"><span style="top:-0.30211999999999983em;"><span class="pstrut" style="height:3.050005em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord text mtight"><span class="mord mtight">ee repulsion</span></span></span></span></span><span style="top:-3.050005em;"><span class="pstrut" style="height:3.050005em;"></span><span class="mord munder"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.050005em;"><span class="svg-align" style="top:-0.9882279999999999em;"><span class="pstrut" style="height:3.050005em;"></span><span class="stretchy" style="height:0.548em;min-width:1.6em;"><span class="brace-left" style="height:0.548em;"><svg width='400em' height='0.548em' viewBox='0 0 400000 548' preserveAspectRatio='xMinYMin slice'><path d='M0 6l6-6h17c12.688 0 19.313.3 20 1 4 4 7.313 8.3 10 13
+ 35.313 51.3 80.813 93.8 136.5 127.5 55.688 33.7 117.188 55.8 184.5 66.5.688
+ 0 2 .3 4 1 18.688 2.7 76 4.3 172 5h399450v120H429l-6-1c-124.688-8-235-61.7
+-331-161C60.687 138.7 32.312 99.3 7 54L0 41V6z'/></svg></span><span class="brace-center" style="height:0.548em;"><svg width='400em' height='0.548em' viewBox='0 0 400000 548' preserveAspectRatio='xMidYMin slice'><path d='M199572 214
+c100.7 8.3 195.3 44 280 108 55.3 42 101.7 93 139 153l9 14c2.7-4 5.7-8.7 9-14
+ 53.3-86.7 123.7-153 211-199 66.7-36 137.3-56.3 212-62h199568v120H200432c-178.3
+ 11.7-311.7 78.3-403 201-6 8-9.7 12-11 12-.7.7-6.7 1-18 1s-17.3-.3-18-1c-1.3 0
+-5-4-11-12-44.7-59.3-101.3-106.3-170-141s-145.3-54.3-229-60H0V214z'/></svg></span><span class="brace-right" style="height:0.548em;"><svg width='400em' height='0.548em' viewBox='0 0 400000 548' preserveAspectRatio='xMaxYMin slice'><path d='M399994 0l6 6v35l-6 11c-56 104-135.3 181.3-238 232-57.3
+ 28.7-117 45-179 50H-300V214h399897c43.3-7 81-15 113-26 100.7-33 179.7-91 237
+-174 2.7-5 6-9 10-13 .7-1 7.3-1 20-1h17z'/></svg></span></span></span><span style="top:-3.050005em;"><span class="pstrut" style="height:3.050005em;"></span><span class="mord"><span class="mop op-limits"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.050005em;"><span style="top:-1.8723309999999997em;margin-left:0em;"><span class="pstrut" style="height:3.05em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight" style="margin-right:0.05724em;">j</span></span></span><span style="top:-3.0500049999999996em;"><span class="pstrut" style="height:3.05em;"></span><span><span class="mop op-symbol large-op">∑</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:1.413777em;"><span></span></span></span></span></span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault" style="margin-right:0.09618em;">J</span><span class="mopen">(</span><span class="mord mathdefault" style="margin-right:0.05724em;">j</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mord mathdefault" style="margin-right:0.07153em;">K</span><span class="mopen">(</span><span class="mord mathdefault" style="margin-right:0.05724em;">j</span><span class="mclose">)</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:2.061777em;"><span></span></span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:2.8839930000000003em;"><span></span></span></span></span></span></span></span></span></span></p>
+<h3 id="the-self-consistent-field-scf"><a class="markdownIt-Anchor" href="#the-self-consistent-field-scf"></a> The Self Consistent Field (SCF)</h3>
+<p>In order to construct the Fockian, information about all the electron should be known at first which is what we need to know at last. To solve this problem, a initial guess for the electron’s wavefunction {<span class="katex"><span class="katex-mathml"><math><semantics><mrow><msubsup><mi>ψ</mi><mi>i</mi><mn>0</mn></msubsup></mrow><annotation encoding="application/x-tex">\psi^0_i</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.072772em;vertical-align:-0.258664em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.03588em;">ψ</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-2.441336em;margin-left:-0.03588em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">i</span></span></span><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">0</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.258664em;"><span></span></span></span></span></span></span></span></span></span>} is needed. According to these wavefunction, a initial Fockian <span class="katex"><span class="katex-mathml"><math><semantics><mrow><msup><mi>F</mi><mn>0</mn></msup></mrow><annotation encoding="application/x-tex">F^0</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8141079999999999em;vertical-align:0em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.13889em;">F</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">0</span></span></span></span></span></span></span></span></span></span></span> can be constructed, then a set of new wavefunctions can be solved {<span class="katex"><span class="katex-mathml"><math><semantics><mrow><msubsup><mi>ψ</mi><mi>i</mi><mn>1</mn></msubsup></mrow><annotation encoding="application/x-tex">\psi_i^1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.072772em;vertical-align:-0.258664em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.03588em;">ψ</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-2.441336em;margin-left:-0.03588em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">i</span></span></span><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.258664em;"><span></span></span></span></span></span></span></span></span></span>}, then a Fokian 1 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><msup><mi>F</mi><mn>1</mn></msup></mrow><annotation encoding="application/x-tex">F^1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8141079999999999em;vertical-align:0em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.13889em;">F</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">1</span></span></span></span></span></span></span></span></span></span></span> is constructed, etc…</p>
+<h3 id="matrix-form-of-fockian-the-hartree-fock-roothan-equation"><a class="markdownIt-Anchor" href="#matrix-form-of-fockian-the-hartree-fock-roothan-equation"></a> Matrix Form of Fockian: The Hartree-Fock-Roothan Equation</h3>
+<p>Usually we won’t present a wavefunction by a long set of data, instead we use the basis functions. Every single electron wavefunction can be expanded in terms of basis function:</p>
+<p class='katex-block'><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>ψ</mi><mi>i</mi></msub><mo>=</mo><munder><mo>∑</mo><mi>μ</mi></munder><msub><mi>c</mi><mi>μ</mi></msub><msub><mi>ϕ</mi><mi>μ</mi></msub></mrow><annotation encoding="application/x-tex">\psi_i = \sum_\mu c_\mu \phi_\mu
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.03588em;">ψ</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31166399999999994em;"><span style="top:-2.5500000000000003em;margin-left:-0.03588em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:2.4361180000000004em;vertical-align:-1.386113em;"></span><span class="mop op-limits"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.0500050000000003em;"><span style="top:-1.8999949999999999em;margin-left:0em;"><span class="pstrut" style="height:3.05em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">μ</span></span></span><span style="top:-3.050005em;"><span class="pstrut" style="height:3.05em;"></span><span><span class="mop op-symbol large-op">∑</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:1.386113em;"><span></span></span></span></span></span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord"><span class="mord mathdefault">c</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.15139200000000003em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">μ</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.286108em;"><span></span></span></span></span></span></span><span class="mord"><span class="mord mathdefault">ϕ</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.15139200000000003em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">μ</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.286108em;"><span></span></span></span></span></span></span></span></span></span></span></p>
+<p>The basis function <span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>ϕ</mi><mi>μ</mi></msub></mrow><annotation encoding="application/x-tex">\phi_\mu</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.980548em;vertical-align:-0.286108em;"></span><span class="mord"><span class="mord mathdefault">ϕ</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.15139200000000003em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">μ</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.286108em;"><span></span></span></span></span></span></span></span></span></span> won’t change during the calculation, but the coefficient {<span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>c</mi><mi>μ</mi></msub></mrow><annotation encoding="application/x-tex">c_\mu</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.716668em;vertical-align:-0.286108em;"></span><span class="mord"><span class="mord mathdefault">c</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.15139200000000003em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">μ</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.286108em;"><span></span></span></span></span></span></span></span></span></span>} does. Then the Fockian can be projected into the space of basis function, then become a matrix:</p>
+<p class='katex-block'><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mtext mathvariant="bold">FC</mtext><mo>=</mo><mtext mathvariant="bold">C</mtext><mi>ϵ</mi></mrow><annotation encoding="application/x-tex">\textbf{F}\textbf{C}= \textbf{C}\epsilon
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68611em;vertical-align:0em;"></span><span class="mord text"><span class="mord textbf">F</span></span><span class="mord text"><span class="mord textbf">C</span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.68611em;vertical-align:0em;"></span><span class="mord text"><span class="mord textbf">C</span></span><span class="mord mathdefault">ϵ</span></span></span></span></span></p>
+<p>For the non-orthogonal basis</p>
+<p class='katex-block'><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mtext mathvariant="bold">FC</mtext><mo>=</mo><mtext mathvariant="bold">SC</mtext><mi>ϵ</mi></mrow><annotation encoding="application/x-tex">\textbf{F}\textbf{C}= \textbf{SC}\epsilon
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68611em;vertical-align:0em;"></span><span class="mord text"><span class="mord textbf">F</span></span><span class="mord text"><span class="mord textbf">C</span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.68611em;vertical-align:0em;"></span><span class="mord text"><span class="mord textbf">SC</span></span><span class="mord mathdefault">ϵ</span></span></span></span></span></p>
+<p>we can orthogonalize the basis at first by find <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mtext mathvariant="bold">X</mtext><mo>=</mo><msup><mtext mathvariant="bold">S</mtext><mrow><mo>−</mo><mn>1</mn><mi mathvariant="normal">/</mi><mn>2</mn></mrow></msup></mrow><annotation encoding="application/x-tex">\textbf{X}= \textbf{S}^{-1/2}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68611em;vertical-align:0em;"></span><span class="mord text"><span class="mord textbf">X</span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.96401em;vertical-align:0em;"></span><span class="mord"><span class="mord text"><span class="mord textbf">S</span></span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.96401em;"><span style="top:-3.13901em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">−</span><span class="mord mtight">1</span><span class="mord mtight">/</span><span class="mord mtight">2</span></span></span></span></span></span></span></span></span></span></span></span>, then the following condition is fulfilled:</p>
+<p class='katex-block'><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><msup><mtext mathvariant="bold">X</mtext><mo>†</mo></msup><mtext mathvariant="bold">SX</mtext><mo>=</mo><mtext mathvariant="bold">I</mtext></mrow><annotation encoding="application/x-tex">\textbf{X}^\dagger\textbf{S}\textbf{X} = \textbf{I}
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.9251179999999999em;vertical-align:0em;"></span><span class="mord"><span class="mord text"><span class="mord textbf">X</span></span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.9251179999999999em;"><span style="top:-3.1390100000000003em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mbin mtight">†</span></span></span></span></span></span></span></span><span class="mord text"><span class="mord textbf">S</span></span><span class="mord text"><span class="mord textbf">X</span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.68611em;vertical-align:0em;"></span><span class="mord text"><span class="mord textbf">I</span></span></span></span></span></span></p>
+<p>Substitute <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mtext mathvariant="bold">X</mtext><msup><mtext mathvariant="bold">X</mtext><mrow><mo>−</mo><mn>1</mn></mrow></msup></mrow><annotation encoding="application/x-tex">\textbf{X}\textbf{X}^{-1}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.890118em;vertical-align:0em;"></span><span class="mord text"><span class="mord textbf">X</span></span><span class="mord"><span class="mord text"><span class="mord textbf">X</span></span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.890118em;"><span style="top:-3.13901em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">−</span><span class="mord mtight">1</span></span></span></span></span></span></span></span></span></span></span></span> into Fockian</p>
+<p class='katex-block'><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><msup><mtext mathvariant="bold">X</mtext><mo>†</mo></msup><mtext mathvariant="bold">FX</mtext><msup><mtext mathvariant="bold">X</mtext><mrow><mo>−</mo><mn>1</mn></mrow></msup><mtext mathvariant="bold">C</mtext><mo>=</mo><msup><mtext mathvariant="bold">X</mtext><mo>†</mo></msup><mtext mathvariant="bold">SX</mtext><msup><mtext mathvariant="bold">X</mtext><mrow><mo>−</mo><mn>1</mn></mrow></msup><mtext mathvariant="bold">C</mtext><mi>ϵ</mi></mrow><annotation encoding="application/x-tex">\textbf{X}^\dagger\textbf{FX}\textbf{X}^{-1}\textbf{C} = \textbf{X}^\dagger\textbf{SX}\textbf{X}^{-1}\textbf{C}\epsilon
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.9251179999999999em;vertical-align:0em;"></span><span class="mord"><span class="mord text"><span class="mord textbf">X</span></span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.9251179999999999em;"><span style="top:-3.1390100000000003em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mbin mtight">†</span></span></span></span></span></span></span></span><span class="mord text"><span class="mord textbf">FX</span></span><span class="mord"><span class="mord text"><span class="mord textbf">X</span></span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.890118em;"><span style="top:-3.13901em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">−</span><span class="mord mtight">1</span></span></span></span></span></span></span></span></span><span class="mord text"><span class="mord textbf">C</span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.9251179999999999em;vertical-align:0em;"></span><span class="mord"><span class="mord text"><span class="mord textbf">X</span></span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.9251179999999999em;"><span style="top:-3.1390100000000003em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mbin mtight">†</span></span></span></span></span></span></span></span><span class="mord text"><span class="mord textbf">SX</span></span><span class="mord"><span class="mord text"><span class="mord textbf">X</span></span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.890118em;"><span style="top:-3.13901em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">−</span><span class="mord mtight">1</span></span></span></span></span></span></span></span></span><span class="mord text"><span class="mord textbf">C</span></span><span class="mord mathdefault">ϵ</span></span></span></span></span></p>
+<p class='katex-block'><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><msup><mtext mathvariant="bold">F</mtext><mo mathvariant="normal">′</mo></msup><msup><mtext mathvariant="bold">C</mtext><mo mathvariant="normal">′</mo></msup><mo>=</mo><msup><mtext mathvariant="bold">C</mtext><mo mathvariant="normal">′</mo></msup><mi>ϵ</mi></mrow><annotation encoding="application/x-tex">\textbf{F}^\prime \textbf{C}^\prime = \textbf{C}^\prime\epsilon
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.827902em;vertical-align:0em;"></span><span class="mord"><span class="mord text"><span class="mord textbf">F</span></span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.827902em;"><span style="top:-3.1390100000000003em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">′</span></span></span></span></span></span></span></span><span class="mord"><span class="mord text"><span class="mord textbf">C</span></span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.827902em;"><span style="top:-3.1390100000000003em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">′</span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.827902em;vertical-align:0em;"></span><span class="mord"><span class="mord text"><span class="mord textbf">C</span></span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.827902em;"><span style="top:-3.1390100000000003em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">′</span></span></span></span></span></span></span></span><span class="mord mathdefault">ϵ</span></span></span></span></span></p>
+<p>Where<span class="katex"><span class="katex-mathml"><math><semantics><mrow><msup><mtext mathvariant="bold">X</mtext><mo>†</mo></msup><mtext mathvariant="bold">FX</mtext><mo>=</mo><msup><mtext mathvariant="bold">F</mtext><mo mathvariant="normal">′</mo></msup></mrow><annotation encoding="application/x-tex">\textbf{X}^\dagger\textbf{FX} = \textbf{F}^\prime</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.9251179999999999em;vertical-align:0em;"></span><span class="mord"><span class="mord text"><span class="mord textbf">X</span></span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.9251179999999999em;"><span style="top:-3.1390100000000003em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mbin mtight">†</span></span></span></span></span></span></span></span><span class="mord text"><span class="mord textbf">FX</span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.827902em;vertical-align:0em;"></span><span class="mord"><span class="mord text"><span class="mord textbf">F</span></span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.827902em;"><span style="top:-3.1390100000000003em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">′</span></span></span></span></span></span></span></span></span></span></span>, <span class="katex"><span class="katex-mathml"><math><semantics><mrow><msup><mtext mathvariant="bold">X</mtext><mrow><mo>−</mo><mn>1</mn></mrow></msup><mtext mathvariant="bold">C</mtext><mo>=</mo><msup><mtext mathvariant="bold">C</mtext><mo mathvariant="normal">′</mo></msup></mrow><annotation encoding="application/x-tex">\textbf{X}^{-1}\textbf{C} = \textbf{C}^\prime</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.890118em;vertical-align:0em;"></span><span class="mord"><span class="mord text"><span class="mord textbf">X</span></span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.890118em;"><span style="top:-3.13901em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">−</span><span class="mord mtight">1</span></span></span></span></span></span></span></span></span><span class="mord text"><span class="mord textbf">C</span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.827902em;vertical-align:0em;"></span><span class="mord"><span class="mord text"><span class="mord textbf">C</span></span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.827902em;"><span style="top:-3.1390100000000003em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">′</span></span></span></span></span></span></span></span></span></span></span></p>
+<h2 id="programing"><a class="markdownIt-Anchor" href="#programing"></a> Programing</h2>
+<p>A home-made simple HF-SCF python program is <a href="https://github.com/robinzyb/HFpy" target="_blank" rel="noopener">here</a>.</p>
+<h3 id="the-recipe"><a class="markdownIt-Anchor" href="#the-recipe"></a> The Recipe</h3>
+<p>Follow the recipe from <em>Modern Quantum Chemistry</em>, we use the simple sto-3g basis.</p>
+<ol>
+<li>Give the system information: the element position, the element nuclear charge and the electron number of whole system. (<code>main.py</code>)</li>
+<li>Calculate the basic integration: kinetic integral, nuclear attraction integral, electron repulsion integral (<code>integration.py</code>)</li>
+<li>Obtain the <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mtext mathvariant="bold">X</mtext></mrow><annotation encoding="application/x-tex">\textbf{X}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68611em;vertical-align:0em;"></span><span class="mord text"><span class="mord textbf">X</span></span></span></span></span> (<code>math.py</code>)</li>
+<li>Initial guess of a set of coefficient (i.e. a set of single electron wavefunction(<code>main.py</code>)</li>
+<li>Obtain the density matrix(<code>integration.py</code>)</li>
+<li>Obtain the fock and fock prime matirx( <code>integration.py</code>)</li>
+<li>Diagonize and solve fock prime to get <span class="katex"><span class="katex-mathml"><math><semantics><mrow><msup><mtext mathvariant="bold">C</mtext><mo mathvariant="normal">′</mo></msup></mrow><annotation encoding="application/x-tex">\textbf{C}^\prime</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.827902em;vertical-align:0em;"></span><span class="mord"><span class="mord text"><span class="mord textbf">C</span></span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.827902em;"><span style="top:-3.1390100000000003em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">′</span></span></span></span></span></span></span></span></span></span></span> (<code>main.py</code>)</li>
+<li>Get new <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mtext mathvariant="bold">C</mtext></mrow><annotation encoding="application/x-tex">\textbf{C}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68611em;vertical-align:0em;"></span><span class="mord text"><span class="mord textbf">C</span></span></span></span></span> from <span class="katex"><span class="katex-mathml"><math><semantics><mrow><msup><mtext mathvariant="bold">C</mtext><mo mathvariant="normal">′</mo></msup></mrow><annotation encoding="application/x-tex">\textbf{C}^\prime</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.827902em;vertical-align:0em;"></span><span class="mord"><span class="mord text"><span class="mord textbf">C</span></span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.827902em;"><span style="top:-3.1390100000000003em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">′</span></span></span></span></span></span></span></span></span></span></span> (<code>main.py</code>)</li>
+<li>Compare the difference between old <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mtext mathvariant="bold">C</mtext></mrow><annotation encoding="application/x-tex">\textbf{C}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68611em;vertical-align:0em;"></span><span class="mord text"><span class="mord textbf">C</span></span></span></span></span> and new <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mtext mathvariant="bold">C</mtext></mrow><annotation encoding="application/x-tex">\textbf{C}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68611em;vertical-align:0em;"></span><span class="mord text"><span class="mord textbf">C</span></span></span></span></span>. (<code>main.py</code>)(I took the matrix difference and select out the max difference)</li>
+<li>Check whether the difference met the threshold requirement, if not, go back to fifth step (<code>main.py</code>)(you set threshold value)</li>
+</ol>
+
+        </div>
+    </div>
+    
+        
+    <div class="post__license">
+        <p>
+            <strong>本文作者：</strong>Yongbin Zhuang
+        </p>
+        
+            <p>
+                <strong>
+                    <p>文章默认使用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="noopener">CC BY-NC-SA 4.0</a> 协议进行许可，使用时请注意遵守协议。</p>
+
+                </strong>
+            </p>
+        
+        <p>
+            <strong>
+                本文鏈接：
+            </strong>
+            <a href="http://robinzyb.github.io/2020/05/24/hf_python/">http://robinzyb.github.io/2020/05/24/hf_python/</a>
+        </p>
+    </div>
+ 
+    
+    
+        <div class="post-meta post-footer__meta">
+    <p>
+        最后更新于：2020-05-24
+    </p>
+</div> 
+    
+    
+        <div class="post-cats post-card__cats">
+    
+</div> 
+        <div class="post-tags post-card__tags">
+    
+</div> 
+     
+</article>
+<br>
+
+
+    </div>
+
+
+
+    <br>
+    <div class="cover">
+        
+            <div class="cover__menus">
+                
+                    <a href="/" class="cover-menu button">
+                        首页
+                    </a>
+                    
+                        <span class="separate-dot"></span>
+                    
+                
+                    <a href="/tags/" class="cover-menu button">
+                        标签
+                    </a>
+                    
+                        <span class="separate-dot"></span>
+                    
+                
+                    <a href="/archives/" class="cover-menu button">
+                        归档
+                    </a>
+                    
+                        <span class="separate-dot"></span>
+                    
+                
+                    <a href="/friends/" class="cover-menu button">
+                        友链
+                    </a>
+                    
+                        <span class="separate-dot"></span>
+                    
+                
+                    <a href="/page/" class="cover-menu button">
+                        Page
+                    </a>
+                    
+                
+            </div>
+        
+    </div>
+
+</main>
+<footer class="footer">
+     
+
+
+     
+  
+    
+        
+            <p>Copyright © 2020</p>
+
+        
+    
+    <p>Powered by <a href="https://hexo.io" target="_blank">Hexo</a> | Theme - <a href="https://github.com/ChrAlpha/hexo-theme-cards" target="_blank">Cards</a></p>
+</footer>
+
+
+        </div>
+        
+
+ 
+
+ 
+
+ 
+
+  
+
+
+
+ 
+
+ 
+
+
+
+    </body>
+</html>
