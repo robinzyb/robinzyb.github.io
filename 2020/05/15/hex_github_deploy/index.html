@@ -22,9 +22,10 @@
     
     <title>Hexo Blog Deploy Memoir | RobinRoom</title>
     
+        <meta name="keywords" content="undefined">
     
 
-    <!--Social link-->
+    <!-- OpenGraph -->
      
         <meta name="description" content="在Mac使用hexo与github建立博客 这是我的第一个博客，感谢github提供免费的webserver。hexo是一个开源的blog框架。可以根据markdown文档生成相应的静态网页。 在所有安装之前先下载Mac常用的包管理器Homebrew  安装Hexo 官方安装指南 需先安装git，和node.js。 12brew install gitbrew install node.js 两">
 <meta property="og:type" content="article">
@@ -46,10 +47,21 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-theme-cards@0.3/dist/css/style.min.css">
  
     
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-theme-cards@0.1/dist/css/github.min.css" crossorigin="anonymous" media="none" onload="this.media='all'">
+    
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-theme-cards@0.1/dist/css/github.min.css" media="none" onload="this.media='all'">
     
 
-    <!--LaTex-->
+    
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-theme-cards@0.6/dist/css/note.min.css" media="none" onload="this.media='all'">
+    
+
+    
+        
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-theme-cards@0.6.1/dist/css/dark.min.css">
+
+        
+<script src="https://cdn.jsdelivr.net/npm/hexo-theme-cards@0.6/dist/js/darkmode.min.js"></script>
+
     
 
      
@@ -68,16 +80,92 @@
         <div id="app">
             <header class="header">
     <div class="header__left">
-        
-            <a href="/" class="button">
-                <span class="logo__text">
-                    ← RobinRoom | 首頁
-                </span>
-            </a>
-        
+        <a href="/" class="button">
+            <span class="logo__text">
+                RobinRoom 
+            </span>
+        </a>
     </div>
     <div class="header__right">
-         
+        
+            <div class="cover__menus">
+                
+                    <a href="/" class="cover-menu button">
+                        首页
+                    </a>
+                
+                    <a href="/tags/" class="cover-menu button">
+                        标签
+                    </a>
+                
+                    <a href="/archives/" class="cover-menu button">
+                        归档
+                    </a>
+                
+                    <a href="/friends/" class="cover-menu button">
+                        友链
+                    </a>
+                
+                    <a href="/page/" class="cover-menu button">
+                        Page
+                    </a>
+                
+            </div>
+        
+        
+            <a href="javaScript:void(0);" id="btn-toggle-dark">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+            </a>
+        
+        
+        
+            <a class="dropdown-icon button" id="btn-dropdown">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" width='24' height='24' fill="none" stroke="currentColor" stroke-width="0.7" stroke-linecap="round" stroke-linejoin="round">
+                    <path fill="currentColor" d="M3.314,4.8h13.372c0.41,0,0.743-0.333,0.743-0.743c0-0.41-0.333-0.743-0.743-0.743H3.314c-0.41,0-0.743,0.333-0.743,0.743C2.571,4.467,2.904,4.8,3.314,4.8z M16.686,15.2H3.314c-0.41,0-0.743,0.333-0.743,0.743s0.333,0.743,0.743,0.743h13.372c0.41,0,0.743-0.333,0.743-0.743S17.096,15.2,16.686,15.2z M16.686,9.257H3.314c-0.41,0-0.743,0.333-0.743,0.743s0.333,0.743,0.743,0.743h13.372c0.41,0,0.743-0.333,0.743-0.743S17.096,9.257,16.686,9.257z"></path>
+                </svg>
+            </a>
+            <div class="dropdown-menus" id="dropdown-menus">
+                <a class="dropback-icon button" id="btn-dropback">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" width='24' height='24' fill="none" stroke="currentColor" stroke-width="0.7" stroke-linecap="round" stroke-linejoin="round">
+                        <path fill="currentColor" d="M11.469,10l7.08-7.08c0.406-0.406,0.406-1.064,0-1.469c-0.406-0.406-1.063-0.406-1.469,0L10,8.53l-7.081-7.08c-0.406-0.406-1.064-0.406-1.469,0c-0.406,0.406-0.406,1.063,0,1.469L8.531,10L1.45,17.081c-0.406,0.406-0.406,1.064,0,1.469c0.203,0.203,0.469,0.304,0.735,0.304c0.266,0,0.531-0.101,0.735-0.304L10,11.469l7.08,7.081c0.203,0.203,0.469,0.304,0.735,0.304c0.267,0,0.532-0.101,0.735-0.304c0.406-0.406,0.406-1.064,0-1.469L11.469,10z"></path>
+                    </svg>
+                </a>
+                
+                    <a href="/" class="dropdown-menu button">
+                        首页
+                    </a>
+                
+                    <a href="/tags/" class="dropdown-menu button">
+                        标签
+                    </a>
+                
+                    <a href="/archives/" class="dropdown-menu button">
+                        归档
+                    </a>
+                
+                    <a href="/friends/" class="dropdown-menu button">
+                        友链
+                    </a>
+                
+                    <a href="/page/" class="dropdown-menu button">
+                        Page
+                    </a>
+                
+            </div>
+            <script>
+                document.getElementById('btn-dropdown').addEventListener('click', () => {
+                    const dd = document.getElementById('dropdown-menus');
+                    dd.style.display = 'flex';
+                    setTimeout(() => {dd.style.transform = 'translateY(0)';dd.style.opacity = '1';}, 1)
+                });
+                document.getElementById('btn-dropback').addEventListener('click', () => {
+                    const dd = document.getElementById('dropdown-menus');
+                    dd.style.transform = 'translateY(2.25rem)';                    
+                    dd.style.opacity = '0';
+                    setTimeout(() => {dd.style.display = 'none';}, 350);
+                });
+            </script>
+        
     </div>
 </header>
 
@@ -112,14 +200,13 @@
                 <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#安装hexo"><span class="toc-text"> 安装Hexo</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#设置github-page"><span class="toc-text"> 设置GitHub Page</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#本地hexo的设置"><span class="toc-text"> 本地Hexo的设置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#将本地的hexo-push到github"><span class="toc-text"> 将本地的Hexo Push到Github</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#hexo博客source和page分离"><span class="toc-text"> Hexo博客：Source和Page分离</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#使用travis部署网页"><span class="toc-text"> 使用Travis部署网页</span></a></li></ol>
             </div>
         </aside>
-
-<article class="post content-card">
-    <div class="post__header">
-        
-             
-        
-        
-            
+        <article class="post content-card">
+            <div class="post__header">
+                
+                     
+                
+                
+                    
     <div class="post__expire" id="post-expired-notify">
         <p>
             本文最後更新於 <span id="expire-date"></span> 天前，文中部分描述可能已經過時。
@@ -139,11 +226,11 @@
         })();
     </script>
 
-        
-    </div>
-    <div class="post__content">
-        <div class="markdown-body">
-            <h1 id="在mac使用hexo与github建立博客"><a class="markdownIt-Anchor" href="#在mac使用hexo与github建立博客"></a> 在Mac使用hexo与github建立博客</h1>
+                
+            </div>
+            <div class="post__content">
+                <div class="md-content">
+                    <h1 id="在mac使用hexo与github建立博客"><a class="markdownIt-Anchor" href="#在mac使用hexo与github建立博客"></a> 在Mac使用hexo与github建立博客</h1>
 <p>这是我的第一个博客，感谢github提供免费的webserver。<a href="https://hexo.io" target="_blank" rel="noopener">hexo</a>是一个开源的blog框架。可以根据markdown文档生成相应的静态网页。</p>
 <p>在所有安装之前先下载Mac常用的包管理器Homebrew</p>
 <h2 id="安装hexo"><a class="markdownIt-Anchor" href="#安装hexo"></a> 安装Hexo</h2>
@@ -177,95 +264,49 @@
 <p>在检查一下你的https://username.github.io</p>
 <p>这样博客就部署好了</p>
 
-        </div>
-    </div>
-    
-        
+                </div>
+            </div>
+            
+                
     <div class="post__license">
         <p>
             <strong>本文作者：</strong>Yongbin Zhuang
         </p>
-        
-            <p>
-                <strong>
-                    <p>文章默认使用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="noopener">CC BY-NC-SA 4.0</a> 协议进行许可，使用时请注意遵守协议。</p>
-
-                </strong>
-            </p>
-        
         <p>
             <strong>
                 本文鏈接：
             </strong>
             <a href="http://robinzyb.github.io/2020/05/15/hex_github_deploy/">http://robinzyb.github.io/2020/05/15/hex_github_deploy/</a>
         </p>
+        
+            <strong>
+                <p>文章默认使用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="noopener">CC BY-NC-SA 4.0</a> 协议进行许可，使用时请注意遵守协议。</p>
+
+            </strong>
+        
     </div>
  
-    
-    
-        <div class="post-meta post-footer__meta">
+            
+            
+                <div class="post-meta post-footer__meta">
     <p>
         最后更新于：2020-05-24
     </p>
 </div> 
-    
-    
-        <div class="post-cats post-card__cats">
-    
-</div> 
-        <div class="post-tags post-card__tags">
+            
+            
+                <div class="post-cats post-card__cats">
     
 </div> 
-     
-</article>
-<br>
-
-
-    </div>
-
-
-
-    <br>
-    <div class="cover">
-        
-            <div class="cover__menus">
-                
-                    <a href="/" class="cover-menu button">
-                        首页
-                    </a>
-                    
-                        <span class="separate-dot"></span>
-                    
-                
-                    <a href="/tags/" class="cover-menu button">
-                        标签
-                    </a>
-                    
-                        <span class="separate-dot"></span>
-                    
-                
-                    <a href="/archives/" class="cover-menu button">
-                        归档
-                    </a>
-                    
-                        <span class="separate-dot"></span>
-                    
-                
-                    <a href="/friends/" class="cover-menu button">
-                        友链
-                    </a>
-                    
-                        <span class="separate-dot"></span>
-                    
-                
-                    <a href="/page/" class="cover-menu button">
-                        Page
-                    </a>
-                    
-                
-            </div>
+                <div class="post-tags post-card__tags">
+    
+</div> 
+             
+        </article>
+        <br>
         
     </div>
+
 
 </main>
 <footer class="footer">
@@ -306,11 +347,12 @@
 
   
 
-
-
  
 
- 
+
+
+
+
 
 
 

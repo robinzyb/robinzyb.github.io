@@ -22,9 +22,10 @@
     
     <title>Learning Fortran with cp2k &amp;#58; Linked List | RobinRoom</title>
     
+        <meta name="keywords" content="undefinedcp2k">
     
 
-    <!--Social link-->
+    <!-- OpenGraph -->
      
         <meta name="description" content="Learning Fortran with cp2k: Linked List  What is Linked List Linked List is a simple way to organize data in Fortran code, which can help you to read data without allocating large memory in advance.">
 <meta property="og:type" content="article">
@@ -47,10 +48,21 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-theme-cards@0.3/dist/css/style.min.css">
  
     
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-theme-cards@0.1/dist/css/github.min.css" crossorigin="anonymous" media="none" onload="this.media='all'">
+    
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-theme-cards@0.1/dist/css/github.min.css" media="none" onload="this.media='all'">
     
 
-    <!--LaTex-->
+    
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-theme-cards@0.6/dist/css/note.min.css" media="none" onload="this.media='all'">
+    
+
+    
+        
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-theme-cards@0.6.1/dist/css/dark.min.css">
+
+        
+<script src="https://cdn.jsdelivr.net/npm/hexo-theme-cards@0.6/dist/js/darkmode.min.js"></script>
+
     
 
      
@@ -69,16 +81,92 @@
         <div id="app">
             <header class="header">
     <div class="header__left">
-        
-            <a href="/" class="button">
-                <span class="logo__text">
-                    ← RobinRoom | 首頁
-                </span>
-            </a>
-        
+        <a href="/" class="button">
+            <span class="logo__text">
+                RobinRoom 
+            </span>
+        </a>
     </div>
     <div class="header__right">
-         
+        
+            <div class="cover__menus">
+                
+                    <a href="/" class="cover-menu button">
+                        首页
+                    </a>
+                
+                    <a href="/tags/" class="cover-menu button">
+                        标签
+                    </a>
+                
+                    <a href="/archives/" class="cover-menu button">
+                        归档
+                    </a>
+                
+                    <a href="/friends/" class="cover-menu button">
+                        友链
+                    </a>
+                
+                    <a href="/page/" class="cover-menu button">
+                        Page
+                    </a>
+                
+            </div>
+        
+        
+            <a href="javaScript:void(0);" id="btn-toggle-dark">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+            </a>
+        
+        
+        
+            <a class="dropdown-icon button" id="btn-dropdown">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" width='24' height='24' fill="none" stroke="currentColor" stroke-width="0.7" stroke-linecap="round" stroke-linejoin="round">
+                    <path fill="currentColor" d="M3.314,4.8h13.372c0.41,0,0.743-0.333,0.743-0.743c0-0.41-0.333-0.743-0.743-0.743H3.314c-0.41,0-0.743,0.333-0.743,0.743C2.571,4.467,2.904,4.8,3.314,4.8z M16.686,15.2H3.314c-0.41,0-0.743,0.333-0.743,0.743s0.333,0.743,0.743,0.743h13.372c0.41,0,0.743-0.333,0.743-0.743S17.096,15.2,16.686,15.2z M16.686,9.257H3.314c-0.41,0-0.743,0.333-0.743,0.743s0.333,0.743,0.743,0.743h13.372c0.41,0,0.743-0.333,0.743-0.743S17.096,9.257,16.686,9.257z"></path>
+                </svg>
+            </a>
+            <div class="dropdown-menus" id="dropdown-menus">
+                <a class="dropback-icon button" id="btn-dropback">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" width='24' height='24' fill="none" stroke="currentColor" stroke-width="0.7" stroke-linecap="round" stroke-linejoin="round">
+                        <path fill="currentColor" d="M11.469,10l7.08-7.08c0.406-0.406,0.406-1.064,0-1.469c-0.406-0.406-1.063-0.406-1.469,0L10,8.53l-7.081-7.08c-0.406-0.406-1.064-0.406-1.469,0c-0.406,0.406-0.406,1.063,0,1.469L8.531,10L1.45,17.081c-0.406,0.406-0.406,1.064,0,1.469c0.203,0.203,0.469,0.304,0.735,0.304c0.266,0,0.531-0.101,0.735-0.304L10,11.469l7.08,7.081c0.203,0.203,0.469,0.304,0.735,0.304c0.267,0,0.532-0.101,0.735-0.304c0.406-0.406,0.406-1.064,0-1.469L11.469,10z"></path>
+                    </svg>
+                </a>
+                
+                    <a href="/" class="dropdown-menu button">
+                        首页
+                    </a>
+                
+                    <a href="/tags/" class="dropdown-menu button">
+                        标签
+                    </a>
+                
+                    <a href="/archives/" class="dropdown-menu button">
+                        归档
+                    </a>
+                
+                    <a href="/friends/" class="dropdown-menu button">
+                        友链
+                    </a>
+                
+                    <a href="/page/" class="dropdown-menu button">
+                        Page
+                    </a>
+                
+            </div>
+            <script>
+                document.getElementById('btn-dropdown').addEventListener('click', () => {
+                    const dd = document.getElementById('dropdown-menus');
+                    dd.style.display = 'flex';
+                    setTimeout(() => {dd.style.transform = 'translateY(0)';dd.style.opacity = '1';}, 1)
+                });
+                document.getElementById('btn-dropback').addEventListener('click', () => {
+                    const dd = document.getElementById('dropdown-menus');
+                    dd.style.transform = 'translateY(2.25rem)';                    
+                    dd.style.opacity = '0';
+                    setTimeout(() => {dd.style.display = 'none';}, 350);
+                });
+            </script>
+        
     </div>
 </header>
 
@@ -113,14 +201,13 @@
                 <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#what-is-linked-list"><span class="toc-text"> What is Linked List</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#linked-list-used-in-cp2k"><span class="toc-text"> Linked List Used in cp2k</span></a></li></ol>
             </div>
         </aside>
-
-<article class="post content-card">
-    <div class="post__header">
-        
-             
-        
-        
-            
+        <article class="post content-card">
+            <div class="post__header">
+                
+                     
+                
+                
+                    
     <div class="post__expire" id="post-expired-notify">
         <p>
             本文最後更新於 <span id="expire-date"></span> 天前，文中部分描述可能已經過時。
@@ -140,11 +227,11 @@
         })();
     </script>
 
-        
-    </div>
-    <div class="post__content">
-        <div class="markdown-body">
-            <h1 id="learning-fortran-with-cp2k-linked-list"><a class="markdownIt-Anchor" href="#learning-fortran-with-cp2k-linked-list"></a> Learning Fortran with cp2k: Linked List</h1>
+                
+            </div>
+            <div class="post__content">
+                <div class="md-content">
+                    <h1 id="learning-fortran-with-cp2k-linked-list"><a class="markdownIt-Anchor" href="#learning-fortran-with-cp2k-linked-list"></a> Learning Fortran with cp2k: Linked List</h1>
 <h2 id="what-is-linked-list"><a class="markdownIt-Anchor" href="#what-is-linked-list"></a> What is Linked List</h2>
 <p>Linked List is a simple way to organize data in Fortran code, which can help you to read data without allocating large memory in advance.</p>
 <p>Linked List combines the <em>Pointer</em> and <em>Dervied Data Types</em> in Fortran. <em>Derived Data Types</em> is a user-defined type, and is a collection of <em>Intrinsic Type</em> like INTEGER, CHARACTER, LOGIC …</p>
@@ -166,97 +253,51 @@
 <p>Reference:</p>
 <p>(1)  Chapman, S. J. <em>Fortran for Scientists and Engineers</em>, 4th ed.; McGraw-Hill Education, 2018.</p>
 
-        </div>
-    </div>
-    
-        
+                </div>
+            </div>
+            
+                
     <div class="post__license">
         <p>
             <strong>本文作者：</strong>Yongbin Zhuang
         </p>
-        
-            <p>
-                <strong>
-                    <p>文章默认使用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="noopener">CC BY-NC-SA 4.0</a> 协议进行许可，使用时请注意遵守协议。</p>
-
-                </strong>
-            </p>
-        
         <p>
             <strong>
                 本文鏈接：
             </strong>
             <a href="http://robinzyb.github.io/2020/06/19/cp2k-linkedlist/">http://robinzyb.github.io/2020/06/19/cp2k-linkedlist/</a>
         </p>
+        
+            <strong>
+                <p>文章默认使用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="noopener">CC BY-NC-SA 4.0</a> 协议进行许可，使用时请注意遵守协议。</p>
+
+            </strong>
+        
     </div>
  
-    
-    
-        <div class="post-meta post-footer__meta">
+            
+            
+                <div class="post-meta post-footer__meta">
     <p>
         最后更新于：2020-06-19
     </p>
 </div> 
-    
-    
-        <div class="post-cats post-card__cats">
+            
+            
+                <div class="post-cats post-card__cats">
     
 </div> 
-        <div class="post-tags post-card__tags">
+                <div class="post-tags post-card__tags">
     
         <a href="/tags/cp2k/" class="post-tags__link button"># cp2k</a>
     
 </div> 
-     
-</article>
-<br>
-
-
-    </div>
-
-
-
-    <br>
-    <div class="cover">
-        
-            <div class="cover__menus">
-                
-                    <a href="/" class="cover-menu button">
-                        首页
-                    </a>
-                    
-                        <span class="separate-dot"></span>
-                    
-                
-                    <a href="/tags/" class="cover-menu button">
-                        标签
-                    </a>
-                    
-                        <span class="separate-dot"></span>
-                    
-                
-                    <a href="/archives/" class="cover-menu button">
-                        归档
-                    </a>
-                    
-                        <span class="separate-dot"></span>
-                    
-                
-                    <a href="/friends/" class="cover-menu button">
-                        友链
-                    </a>
-                    
-                        <span class="separate-dot"></span>
-                    
-                
-                    <a href="/page/" class="cover-menu button">
-                        Page
-                    </a>
-                    
-                
-            </div>
+             
+        </article>
+        <br>
         
     </div>
+
 
 </main>
 <footer class="footer">
@@ -297,11 +338,12 @@
 
   
 
-
-
  
 
- 
+
+
+
+
 
 
 
