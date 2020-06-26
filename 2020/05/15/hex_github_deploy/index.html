@@ -1,13 +1,11 @@
 <!DOCTYPE html>
 <html lang="zh">
     <head>
-    <meta charset="utf-8">
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
 
     
 
     <!--icon-->
-    
-        <link rel="shortcut icon" type='image/x-icon' href="/favicon.ico">
     
 
     <!-- 渲染优化 -->
@@ -27,12 +25,12 @@
 
     <!-- OpenGraph -->
      
-        <meta name="description" content="在Mac使用hexo与github建立博客 这是我的第一个博客，感谢github提供免费的webserver。hexo是一个开源的blog框架。可以根据markdown文档生成相应的静态网页。 在所有安装之前先下载Mac常用的包管理器Homebrew  安装Hexo 官方安装指南 需先安装git，和node.js。 12brew install gitbrew install node.js 两">
+        <meta name="description" content="在Mac使用hexo与github建立博客这是我的第一个博客，感谢github提供免费的webserver。hexo是一个开源的blog框架。可以根据markdown文档生成相应的静态网页。 在所有安装之前先下载Mac常用的包管理器Homebrew 安装Hexo官方安装指南 需先安装git，和node.js。 12brew install gitbrew install node.js  两者安装">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Hexo Blog Deploy Memoir">
 <meta property="og:url" content="http://robinzyb.github.io/2020/05/15/hex_github_deploy/index.html">
 <meta property="og:site_name" content="RobinRoom">
-<meta property="og:description" content="在Mac使用hexo与github建立博客 这是我的第一个博客，感谢github提供免费的webserver。hexo是一个开源的blog框架。可以根据markdown文档生成相应的静态网页。 在所有安装之前先下载Mac常用的包管理器Homebrew  安装Hexo 官方安装指南 需先安装git，和node.js。 12brew install gitbrew install node.js 两">
+<meta property="og:description" content="在Mac使用hexo与github建立博客这是我的第一个博客，感谢github提供免费的webserver。hexo是一个开源的blog框架。可以根据markdown文档生成相应的静态网页。 在所有安装之前先下载Mac常用的包管理器Homebrew 安装Hexo官方安装指南 需先安装git，和node.js。 12brew install gitbrew install node.js  两者安装">
 <meta property="og:locale" content="zh">
 <meta property="article:published_time" content="2020-05-15T20:47:19.000Z">
 <meta property="article:modified_time" content="2020-05-24T20:48:31.174Z">
@@ -44,11 +42,11 @@
     
 
     
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-theme-cards@0.3/dist/css/style.min.css">
+<link rel="stylesheet" href="/css/style.css">
  
     
     
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-theme-cards@0.1/dist/css/github.min.css" media="none" onload="this.media='all'">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-theme-cards@0.6/dist/css/github.min.css" media="none" onload="this.media='all'">
     
 
     
@@ -67,17 +65,11 @@
      
 
     
-        
-             
-        
-             
-        
-    
 
-<meta name="generator" content="Hexo 4.2.1"></head>
+<meta name="generator" content="Hexo 4.2.1"><!-- hexo-inject:begin --><!-- hexo-inject:end --></head>
 
     <body>
-        <div id="app">
+        <!-- hexo-inject:begin --><!-- hexo-inject:end --><div id="app">
             <header class="header">
     <div class="header__left">
         <a href="/" class="button">
@@ -197,7 +189,7 @@
     <div class="post__with-side">
         <aside class="post-side">
             <div class="post-side__toc">
-                <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#安装hexo"><span class="toc-text"> 安装Hexo</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#设置github-page"><span class="toc-text"> 设置GitHub Page</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#本地hexo的设置"><span class="toc-text"> 本地Hexo的设置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#将本地的hexo-push到github"><span class="toc-text"> 将本地的Hexo Push到Github</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#hexo博客source和page分离"><span class="toc-text"> Hexo博客：Source和Page分离</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#使用travis部署网页"><span class="toc-text"> 使用Travis部署网页</span></a></li></ol>
+                <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#安装Hexo"><span class="toc-text">安装Hexo</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#设置GitHub-Page"><span class="toc-text">设置GitHub Page</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#本地Hexo的设置"><span class="toc-text">本地Hexo的设置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#将本地的Hexo-Push到Github"><span class="toc-text">将本地的Hexo Push到Github</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Hexo博客：Source和Page分离"><span class="toc-text">Hexo博客：Source和Page分离</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#使用Travis部署网页"><span class="toc-text">使用Travis部署网页</span></a></li></ol>
             </div>
         </aside>
         <article class="post content-card">
@@ -209,7 +201,7 @@
                     
     <div class="post__expire" id="post-expired-notify">
         <p>
-            本文最後更新於 <span id="expire-date"></span> 天前，文中部分描述可能已經過時。
+            This article was last updated on <span id="expire-date"></span> days ago, the information described in the article may be outdated.
         </p>
     </div>
     <script>
@@ -230,38 +222,38 @@
             </div>
             <div class="post__content">
                 <div class="md-content">
-                    <h1 id="在mac使用hexo与github建立博客"><a class="markdownIt-Anchor" href="#在mac使用hexo与github建立博客"></a> 在Mac使用hexo与github建立博客</h1>
-<p>这是我的第一个博客，感谢github提供免费的webserver。<a href="https://hexo.io" target="_blank" rel="noopener">hexo</a>是一个开源的blog框架。可以根据markdown文档生成相应的静态网页。</p>
+                    <h1 id="在Mac使用hexo与github建立博客"><a href="#在Mac使用hexo与github建立博客" class="headerlink" title="在Mac使用hexo与github建立博客"></a>在Mac使用hexo与github建立博客</h1><p>这是我的第一个博客，感谢github提供免费的webserver。<a href="https://hexo.io/" target="_blank" rel="noopener">hexo</a>是一个开源的blog框架。可以根据markdown文档生成相应的静态网页。</p>
 <p>在所有安装之前先下载Mac常用的包管理器Homebrew</p>
-<h2 id="安装hexo"><a class="markdownIt-Anchor" href="#安装hexo"></a> 安装Hexo</h2>
-<p><a href="https://hexo.io/docs/" target="_blank" rel="noopener">官方安装指南</a></p>
+<h2 id="安装Hexo"><a href="#安装Hexo" class="headerlink" title="安装Hexo"></a>安装Hexo</h2><p><a href="https://hexo.io/docs/" target="_blank" rel="noopener">官方安装指南</a></p>
 <p>需先安装git，和node.js。</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">brew install git</span><br><span class="line">brew install node.js</span><br></pre></td></tr></table></figure>
+
 <p>两者安装完成后，安装hexo</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install -g hexo-cli</span><br></pre></td></tr></table></figure>
+
 <p>完毕</p>
-<h2 id="设置github-page"><a class="markdownIt-Anchor" href="#设置github-page"></a> 设置GitHub Page</h2>
-<p><a href="https://pages.github.com" target="_blank" rel="noopener">官方GitHub Pages建立指南</a></p>
+<h2 id="设置GitHub-Page"><a href="#设置GitHub-Page" class="headerlink" title="设置GitHub Page"></a>设置GitHub Page</h2><p><a href="https://pages.github.com/" target="_blank" rel="noopener">官方GitHub Pages建立指南</a></p>
 <p>只要注意一点：一开始让username.github.io的仓库是空的，到时候所有东西我们都从本地push上去。</p>
-<h2 id="本地hexo的设置"><a class="markdownIt-Anchor" href="#本地hexo的设置"></a> 本地Hexo的设置</h2>
-<p>首先找个空的文件夹，<a href="http://xn--username-wg0m349bg9a.github.io" target="_blank" rel="noopener">命名为username.github.io</a>，这个文件夹是之后我们需要跟github仓库连接起来的。</p>
+<h2 id="本地Hexo的设置"><a href="#本地Hexo的设置" class="headerlink" title="本地Hexo的设置"></a>本地Hexo的设置</h2><p>首先找个空的文件夹，命名为username.github.io，这个文件夹是之后我们需要跟github仓库连接起来的。</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> username.github.io</span><br><span class="line">hexo init</span><br></pre></td></tr></table></figure>
-<h2 id="将本地的hexo-push到github"><a class="markdownIt-Anchor" href="#将本地的hexo-push到github"></a> 将本地的Hexo Push到Github</h2>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#当前文件夹初始化仓库</span></span><br><span class="line">git init</span><br><span class="line"><span class="comment">#添加github repository</span></span><br><span class="line">git remote add &lt;你的github repository url&gt;</span><br><span class="line"><span class="comment">#把本地文件都传送到github</span></span><br><span class="line">git push -u origin master</span><br></pre></td></tr></table></figure>
-<h2 id="hexo博客source和page分离"><a class="markdownIt-Anchor" href="#hexo博客source和page分离"></a> Hexo博客：Source和Page分离</h2>
-<p>以上只是把一堆文件简单的push到github，hexo还没自动生成网页。接下来为了保持仓库简洁我会专门分出一条branch: hexo-source，然后把master branch留给生成的网页。因为最新的github只能从master branch建立网页，因此必须这么做。</p>
+
+<h2 id="将本地的Hexo-Push到Github"><a href="#将本地的Hexo-Push到Github" class="headerlink" title="将本地的Hexo Push到Github"></a>将本地的Hexo Push到Github</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#当前文件夹初始化仓库</span></span><br><span class="line">git init</span><br><span class="line"><span class="comment">#添加github repository</span></span><br><span class="line">git remote add &lt;你的github repository url&gt;</span><br><span class="line"><span class="comment">#把本地文件都传送到github</span></span><br><span class="line">git push -u origin master</span><br></pre></td></tr></table></figure>
+
+<h2 id="Hexo博客：Source和Page分离"><a href="#Hexo博客：Source和Page分离" class="headerlink" title="Hexo博客：Source和Page分离"></a>Hexo博客：Source和Page分离</h2><p>以上只是把一堆文件简单的push到github，hexo还没自动生成网页。接下来为了保持仓库简洁我会专门分出一条branch: hexo-source，然后把master branch留给生成的网页。因为最新的github只能从master branch建立网页，因此必须这么做。</p>
 <p>首先本地建立hexo-source branch，并清空master</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">git checkout -b hexo-source</span><br><span class="line"><span class="comment">#把这个branch 同步到github repository</span></span><br><span class="line">git push -u origin hexo-source</span><br><span class="line"><span class="comment">#接着把master branch 清空</span></span><br><span class="line">git checkout master</span><br><span class="line">git rm ./\*</span><br><span class="line">git commit</span><br><span class="line">git push</span><br><span class="line"><span class="comment">#如果push成功，你会看到主页上的master branch内容是空的，多了一个hexo-source</span></span><br></pre></td></tr></table></figure>
-<h2 id="使用travis部署网页"><a class="markdownIt-Anchor" href="#使用travis部署网页"></a> 使用Travis部署网页</h2>
-<p>本来是在本地用命令<code>hexo generate</code>生成网页然后push到github，现在可以用travis在远程完成这个动作。本地只需要修改一个travis设置文件让travis知道怎么去部署就可以了。</p>
+
+<h2 id="使用Travis部署网页"><a href="#使用Travis部署网页" class="headerlink" title="使用Travis部署网页"></a>使用Travis部署网页</h2><p>本来是在本地用命令<code>hexo generate</code>生成网页然后push到github，现在可以用travis在远程完成这个动作。本地只需要修改一个travis设置文件让travis知道怎么去部署就可以了。</p>
 <p>首先加入<a href="https://github.com/marketplace/travis-ci" target="_blank" rel="noopener">travis</a>到github账号，然后在travis中给自己github账号的username.github.io仓库权限。</p>
 <p>然后在github中生成一个可以进入该仓库的repo scopes的<a href="https://github.com/settings/tokens" target="_blank" rel="noopener">token</a>，复制该token，放入travis中的<strong>Environment Variables</strong>，名字为GH_TOKEN, token放入token栏中。保存他。</p>
 <p>在本地，hexo-source branch中加入<code>.travis.yml</code>文件，内容为</p>
 <figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">sudo:</span> <span class="literal">false</span></span><br><span class="line"><span class="attr">language:</span> <span class="string">node_js</span></span><br><span class="line"><span class="attr">node_js:</span></span><br><span class="line">  <span class="bullet">-</span> <span class="number">10</span> <span class="comment"># use nodejs v10 LTS</span></span><br><span class="line"><span class="attr">cache:</span> <span class="string">npm</span></span><br><span class="line"><span class="attr">branches:</span></span><br><span class="line">  <span class="attr">only:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">hexo-source</span> <span class="comment"># build master branch only</span></span><br><span class="line"><span class="attr">script:</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">hexo</span> <span class="string">generate</span> <span class="comment"># generate static files</span></span><br><span class="line"><span class="attr">deploy:</span></span><br><span class="line">  <span class="attr">provider:</span> <span class="string">pages</span></span><br><span class="line">  <span class="attr">skip-cleanup:</span> <span class="literal">true</span></span><br><span class="line">  <span class="attr">github-token:</span> <span class="string">$GH_TOKEN</span></span><br><span class="line">  <span class="attr">keep-history:</span> <span class="literal">true</span></span><br><span class="line">  <span class="attr">target_branch:</span> <span class="string">master</span> <span class="comment">#最后会部署到master branch</span></span><br><span class="line">  <span class="attr">on:</span></span><br><span class="line">    <span class="attr">branch:</span> <span class="string">hexo-source</span></span><br><span class="line">  <span class="attr">local-dir:</span> <span class="string">public</span></span><br></pre></td></tr></table></figure>
+
 <p>还有就是hexo自己的配置文件<code>_config.yml</code>，记得更改<code>url</code>为<code>https://username.github.io</code>, username是自己的用户名。</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git add _config.yml .travis.yml</span><br><span class="line">git commit</span><br><span class="line">git push</span><br></pre></td></tr></table></figure>
+
 <p>push成功后等个几分钟travis就会给你Pull Request一个生成好的网页文件。</p>
-<p>在检查一下你的https://username.github.io</p>
+<p>在检查一下你的<a href="https://username.github.io/" target="_blank" rel="noopener">https://username.github.io</a></p>
 <p>这样博客就部署好了</p>
 
                 </div>
@@ -270,19 +262,14 @@
                 
     <div class="post__license">
         <p>
-            <strong>本文作者：</strong>Yongbin Zhuang
+            <strong>Author: </strong>Yongbin Zhuang
         </p>
         <p>
             <strong>
-                本文鏈接：
+                Permalink: 
             </strong>
             <a href="http://robinzyb.github.io/2020/05/15/hex_github_deploy/">http://robinzyb.github.io/2020/05/15/hex_github_deploy/</a>
         </p>
-        
-            <strong>
-                <p>文章默认使用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="noopener">CC BY-NC-SA 4.0</a> 协议进行许可，使用时请注意遵守协议。</p>
-
-            </strong>
         
     </div>
  
@@ -342,7 +329,7 @@
             var s = document.getElementsByTagName('script')[0];
             s.parentNode.insertBefore(hm, s);
         })();
-    </script>
+    </script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
  
 
   
